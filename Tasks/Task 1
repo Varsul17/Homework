@@ -5,6 +5,10 @@
 #Daniella Graham 209611995
 
 
+# https://github.com/Varsul17/Homework/blob/main/Tasks/Task%201
+
+
+
 def sumatrix(mat1, mat2):
     if len(mat1) != len(mat2) or len(mat1[0]) != len(mat2[0]):
         print("The matrices do not have the same size")
@@ -61,4 +65,3 @@ if __name__ == "__main__":
         print("The multiplying of the matrices is:")
         MultiplyResult = MultiplyMatrix(mat1, mat2)
         printmat(MultiplyResult)
-
