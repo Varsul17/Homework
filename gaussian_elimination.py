@@ -1,6 +1,6 @@
 import numpy as np
 from numpy.linalg import norm, inv
-
+#avigail
 
 def gaussianElimination(mat):
     N = len(mat)
