@@ -3,7 +3,7 @@ import numpy as np
 
 """
 Function that find the inverse of non-singular matrix
-The function performs elementary row operations to transform it into the identity matrix. 
+The function performs elementary row operations to transform it into the identity matrix.
 The resulting identity matrix will be the inverse of the input matrix if it is non-singular.
  If the input matrix is singular (i.e., its diagonal elements become zero during row operations), it raises an error.
 """
@@ -33,7 +33,7 @@ def inverse(matrix):
 
         # Zero out the elements above and below the diagonal
         for j in range(n):
-            if i != j:
+            if i != j and i < j:
                 scalar = -matrix[j, i]
                 elementary_matrix = row_addition_elementary_matrix(n, j, i, scalar)
                 print(f"elementary matrix for R{j+1} = R{j+1} + ({scalar}R{i+1}):\n {elementary_matrix} \n")
@@ -42,14 +42,26 @@ def inverse(matrix):
                 print("------------------------------------------------------------------------------------------------------------------")
                 identity = np.dot(elementary_matrix, identity)
 
+    for i in range(n)[::-1]:
+        for j in range(n)[::-1]:
+            if i > j:
+                scalar = -matrix[j, i]
+                elementary_matrix = row_addition_elementary_matrix(n, j, i, scalar)
+                print(f"elementary matrix for R{j + 1} = R{j + 1} + ({scalar}R{i + 1}):\n {elementary_matrix} \n")
+                matrix = np.dot(elementary_matrix, matrix)
+                print(f"The matrix after elementary operation :\n {matrix}")
+                print(
+                    "------------------------------------------------------------------------------------------------------------------")
+                identity = np.dot(elementary_matrix, identity)
+
     return identity
 
 
 if __name__ == '__main__':
 
-    A = np.array([[1, 2, 3],
-                  [2, 3, 4],
-                  [3, 4, 6]])
+    A = np.array([[1, 10, -10],
+                  [0, 4, 6],
+                  [0, 1, 9]])
 
     try:
         A_inverse = inverse(A)
