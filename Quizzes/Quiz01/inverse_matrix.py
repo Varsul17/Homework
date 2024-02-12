@@ -18,8 +18,17 @@ def inverse(matrix):
 
     # Perform row operations to transform the input matrix into the identity matrix
     for i in range(n):
+        # Perform row exchanges if the pivot element is zero
         if matrix[i, i] == 0:
-            raise ValueError("Matrix is singular, cannot find its inverse.")
+            # Find a row below with a non-zero element in the same column
+            for k in range(i + 1, n):
+                if matrix[k, i] != 0:
+                    # Exchange rows i and k in both the input matrix and the identity matrix
+                    matrix[[i, k]] = matrix[[k, i]]
+                    identity[[i, k]] = identity[[k, i]]
+                    break
+            else:
+                raise ValueError("Matrix is singular, cannot find its inverse.")
 
         if matrix[i, i] != 1:
             # Scale the current row to make the diagonal element 1
@@ -59,9 +68,9 @@ def inverse(matrix):
 
 if __name__ == '__main__':
 
-    A = np.array([[1, 10, -10],
-                  [0, 4, 6],
-                  [0, 1, 9]])
+    A = np.array([[0, 2, 4],
+                  [0, 5, 9],
+                  [3, 6, 8]])
 
     try:
         A_inverse = inverse(A)
