@@ -1,6 +1,6 @@
 import numpy as np
 
-
+#lolo
 def print_matrix(matrix):  # מתדפיסה את המטריצה
     for row in matrix:
         for element in row:
