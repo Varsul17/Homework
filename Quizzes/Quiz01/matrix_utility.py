@@ -1,6 +1,7 @@
 import numpy as np
 
-def print_matrix(matrix):
+
+def print_matrix(matrix): #מתדפיסה את המטריצה
     for row in matrix:
         for element in row:
             print(element, end=" ")  # Print each element in the row
@@ -8,7 +9,7 @@ def print_matrix(matrix):
     print()
 
 
-def MaxNorm(matrix):
+def MaxNorm(matrix):  # מחשבת את הנורמה של המטריצה
     """
     Function for calculating the max-norm of a matrix
     :param matrix: Matrix nxn
