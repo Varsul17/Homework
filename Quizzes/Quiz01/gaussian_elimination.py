@@ -1,6 +1,6 @@
 import numpy as np
 from numpy.linalg import norm, inv
-#avigail
+
 
 def gaussianElimination(mat):
     N = len(mat)
@@ -85,14 +85,16 @@ def backward_substitution(mat):
 
 if __name__ == '__main__':
 
-    A_b = [[0, 1, -1, -1],
-           [3, -1, 1, 4],
-           [1, 1, -2, -3,]]
+    A_b = [[0, 1, -0, -1],
+           [3, 0, 1, 4],
+           [0, 1, 0, -3,]]
 
-    result = gaussianElimination(A_b)
-    if isinstance(result, str):
-        print(result)
-    else:
-        print("\nSolution for the system:")
-        for x in result:
-            print("{:.6f}".format(x))
+    print(gaussianElimination(A_b))
+
+    # result = gaussianElimination(A_b)
+    # if isinstance(result, str):
+    #     print(result)
+    # else:
+    #     print("\nSolution for the system:")
+    #     for x in result:
+    #         print("{:.6f}".format(x))

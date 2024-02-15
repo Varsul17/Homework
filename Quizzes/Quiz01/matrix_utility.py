@@ -37,13 +37,14 @@ def swap_row(mat, i, j):
         mat[j][k] = temp
     return mat
 
-def is_diagonally_dominant(mat):
-    if mat is None:
-        return False
-
-    d = np.diag(np.abs(mat))  # Find diagonal coefficients
-    s = np.sum(np.abs(mat), axis=1) - d  # Find row sum without diagonal
-    return np.all(d > s)
+# needs a fix
+# def is_diagonally_dominant(mat):
+#     if mat is None:
+#         return False
+#
+#     d = np.diag(np.abs(mat))  # Find diagonal coefficients
+#     s = np.sum(np.abs(mat), axis=1) - d  # Find row sum without diagonal
+#     return np.all(d > s)
 
 
 def is_square_matrix(mat):
@@ -57,37 +58,39 @@ def is_square_matrix(mat):
     return True
 
 
-def reorder_dominant_diagonal(matrix):
-    n = len(matrix)
-    permutation = np.argsort(np.diag(matrix))[::-1]
-    reordered_matrix = matrix[permutation][:, permutation]
-    return reordered_matrix
+# def reorder_dominant_diagonal(matrix):
+#     n = len(matrix)
+#     permutation = np.argsort(np.diag(matrix))[::-1]
+#     reordered_matrix = matrix[permutation][:, permutation]
+#     return reordered_matrix
+# הופכת את המטריצה כמראה, מימין לשמאל מלמטה למעלה
 
 
-def DominantDiagonalFix(matrix):
-    """
-    Function to change a matrix to create a dominant diagonal
-    :param matrix: Matrix nxn
-    :return: Change the matrix to a dominant diagonal
-    """
-    # Check if we have a dominant for each column
-    dom = [0] * len(matrix)
-    result = list()
-    # Find the largest organ in a row
-    for i in range(len(matrix)):
-        for j in range(len(matrix[0])):
-            if (matrix[i][j] > sum(map(abs, map(int, matrix[i]))) - matrix[i][j]):
-                dom[i] = j
-    for i in range(len(matrix)):
-        result.append([])
-        # Cannot dominant diagonal
-        if i not in dom:
-            print("Couldn't find dominant diagonal.")
-            return matrix
-    # Change the matrix to a dominant diagonal
-    for i, j in enumerate(dom):
-        result[j] = (matrix[i])
-    return result
+
+# def DominantDiagonalFix(matrix):
+#     """
+#     Function to change a matrix to create a dominant diagonal
+#     :param matrix: Matrix nxn
+#     :return: Change the matrix to a dominant diagonal
+#     """
+#     n = len(matrix)
+#     for i in range(n):
+#         row_sum = sum(abs(matrix[i][j]) for j in range(n) if i != j)
+#         if abs(matrix[i][i]) <= row_sum:
+#             # Couldn't find dominant diagonal.
+#             print("Couldn't find dominant diagonal.")
+#             return matrix
+#
+#     result = []
+#     for i in range(n):
+#         result.append([0] * n)
+#         result[i][i] = matrix[i][i]
+#         for j in range(n):
+#             if i != j:
+#                 result[i][j] = matrix[j][i]
+#
+#     return result
+
 
 
 def swap_rows_elementary_matrix(n, row1, row2):
@@ -97,6 +100,7 @@ def swap_rows_elementary_matrix(n, row1, row2):
     return np.array(elementary_matrix)
 
 
+#תשתמשו בזה בחישוב עדיף
 def matrix_multiply(A, B):
     if len(A[0]) != len(B):
         raise ValueError("Matrix dimensions are incompatible for multiplication.")
@@ -111,6 +115,7 @@ def matrix_multiply(A, B):
     return np.array(result)
 
 
+#משתמשים בInverse
 def row_addition_elementary_matrix(n, target_row, source_row, scalar=1.0):
     if target_row < 0 or source_row < 0 or target_row >= n or source_row >= n:
         raise ValueError("Invalid row indices.")
@@ -123,7 +128,7 @@ def row_addition_elementary_matrix(n, target_row, source_row, scalar=1.0):
 
     return np.array(elementary_matrix)
 
-
+#משתמשים בInverse
 def scalar_multiplication_elementary_matrix(n, row_index, scalar):
     if row_index < 0 or row_index >= n:
         raise ValueError("Invalid row index.")
@@ -166,27 +171,29 @@ def Determinant(matrix, mul):
     return det
 
 
+
+
 # Partial Pivoting: Find the pivot row with the largest absolute value in the current column
-def partial_pivoting(A, i, N):
-    pivot_row = i
-    v_max = A[pivot_row][i]
-    for j in range(i + 1, N):
-        if abs(A[j][i]) > v_max:
-            v_max = A[j][i]
-            pivot_row = j
-
-    # if a principal diagonal element is zero,it denotes that matrix is singular,
-    # and will lead to a division-by-zero later.
-    if A[i][pivot_row] == 0:
-        return "Singular Matrix"
-
-    # Swap the current row with the pivot row
-    if pivot_row != i:
-        e_matrix = swap_rows_elementary_matrix(N, i, pivot_row)
-        print(f"elementary matrix for swap between row {i} to row {pivot_row} :\n {e_matrix} \n")
-        A = np.dot(e_matrix, A)
-        print(f"The matrix after elementary operation :\n {A}")
-        print("------------------------------------------------------------------")
+# def partial_pivoting(A, i, N):
+#     pivot_row = i
+#     v_max = A[pivot_row][i]
+#     for j in range(i + 1, N):
+#         if abs(A[j][i]) > v_max:
+#             v_max = A[j][i]
+#             pivot_row = j
+#
+#     # if a principal diagonal element is zero,it denotes that matrix is singular,
+#     # and will lead to a division-by-zero later.
+#     if A[i][pivot_row] == 0:
+#         return "Singular Matrix"
+#
+#     # Swap the current row with the pivot row
+#     if pivot_row != i:
+#         e_matrix = swap_rows_elementary_matrix(N, i, pivot_row)
+#         print(f"elementary matrix for swap between row {i} to row {pivot_row} :\n {e_matrix} \n")
+#         A = np.dot(e_matrix, A)
+#         print(f"The matrix after elementary operation :\n {A}")
+#         print("------------------------------------------------------------------")
 
 
 def MultiplyMatrix(matrixA, matrixB):
@@ -212,47 +219,44 @@ def MakeIMatrix(cols, rows):
     return [[1 if x == y else 0 for y in range(cols)] for x in range(rows)]
 
 
-def MulMatrixVector(InversedMat, b_vector):
+
+def MulMatrixVector(matrix, vector):
     """
     Function for multiplying a vector matrix
     :param InversedMat: Matrix nxn
     :param b_vector: Vector n
     :return: Result vector
     """
-    result = []
-    # Initialize the x vector
-    for i in range(len(b_vector)):
-        result.append([])
-        result[i].append(0)
-    # Multiplication of inverse matrix in the result vector
-    for i in range(len(InversedMat)):
-        for k in range(len(b_vector)):
-            result[i][0] += InversedMat[i][k] * b_vector[k][0]
+    result = [0] * len(matrix)
+    for i in range(len(matrix)):
+        for k in range(len(vector)):
+            result[i] += matrix[i][k] * vector[k]
     return result
 
 
-def RowXchageZero(matrix, vector):
-    """
-      Function for replacing rows with both a matrix and a vector
-      :param matrix: Matrix nxn
-      :param vector: Vector n
-      :return: Replace rows after a pivoting process
-      """
+# def RowXchageZero(matrix, vector):
+#     """
+#       Function for replacing rows with both a matrix and a vector
+#       :param matrix: Matrix nxn
+#       :param vector: Vector n
+#       :return: Replace rows after a pivoting process
+#       """
+#
+#     for i in range(len(matrix)):
+#         for j in range(i, len(matrix)):
+#             # The pivot member is not zero
+#             if matrix[i][i] == 0:
+#                 temp = matrix[j]
+#                 temp_b = vector[j]
+#                 matrix[j] = matrix[i]
+#                 vector[j] = vector[i]
+#                 matrix[i] = temp
+#                 vector[i] = temp_b
+#
+#     return [matrix, vector]
 
-    for i in range(len(matrix)):
-        for j in range(i, len(matrix)):
-            # The pivot member is not zero
-            if matrix[i][i] == 0:
-                temp = matrix[j]
-                temp_b = vector[j]
-                matrix[j] = matrix[i]
-                vector[j] = vector[i]
-                matrix[i] = temp
-                vector[i] = temp_b
 
-    return [matrix, vector]
-
-
+# משתמשים בהפיכות
 def Cond(matrix, invert):
     """
     :param matrix: Matrix nxn
@@ -305,6 +309,8 @@ def InverseMatrix(matrix, vector):
     return result
 
 
+
+
 def RowXchange(matrix, vector):
     """
     Function for replacing rows with both a matrix and a vector
@@ -329,12 +335,28 @@ def RowXchange(matrix, vector):
     return [matrix, vector]
 
 
-A = np.array([[1,2, 3],
-              [46, 5, 1666],
-              [454648, -596956, 8574]])
+A = np.array([[1, 2, 9],
+              [1, 1, 0],
+              [1, 1, 5]])
+
+B = np.array([[1, 2, 9],
+              [3, 5, 0],
+              [1, 1, 1]])
 
 
-print("Matrix A:")
-print(A)
-print(MaxNorm(A))
-print(swap_row(A, 1, 2))
+# print("Matrix A:")
+# print(A)
+# print(MaxNorm(A))
+# print(swap_row(A, 1, 2))
+# print(is_square_matrix(A))
+# print(matrix_multiply(A,B))
+# print(MultiplyMatrix(A, B))
+# print(Determinant(A,1))
+
+# det = np.linalg.det(A)
+# print(det) חישוב דטרמיננטה מהספריה בנוסף לפונקציה שיש
+
+vector = [1, 2, 3]
+# print(MakeIMatrix(3,3))
+# print(MulMatrixVector(A,vector))
+print(InverseMatrix(A,vector))

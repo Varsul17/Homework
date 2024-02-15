@@ -1,4 +1,4 @@
-from matrix_utility import row_addition_elementary_matrix, scalar_multiplication_elementary_matrix
+from matrix_utility import row_addition_elementary_matrix, scalar_multiplication_elementary_matrix,Cond
 import numpy as np
 #I am not SHLOMITTTT
 """
@@ -69,9 +69,8 @@ def inverse(matrix):
 
 if __name__ == '__main__':
 
-    A = np.array([[1, 2, 3],
-                  [4, 5, 6],
-                  [7, 8, 9]])
+    A = np.array([[0.913, 0.659],
+                  [0.457, 0.330]])
 
     try:
         A_inverse = inverse(A)
@@ -80,5 +79,8 @@ if __name__ == '__main__':
 
     except ValueError as e:
         print(str(e))
+
+
+print(Cond(A,inverse(A)))
 
 
