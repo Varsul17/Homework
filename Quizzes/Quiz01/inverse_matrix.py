@@ -1,8 +1,9 @@
 from matrix_utility import row_addition_elementary_matrix, scalar_multiplication_elementary_matrix
 import numpy as np
-#I am not Liron!
+#I am not SHLOMITTTT
 """
-Function that find the inverse of non-singular matrix
+Function that find the
+ inverse of non-singular matrix
 The function performs elementary row operations to transform it into the identity matrix.
 The resulting identity matrix will be the inverse of the input matrix if it is non-singular.
  If the input matrix is singular (i.e., its diagonal elements become zero during row operations), it raises an error.
@@ -79,3 +80,5 @@ if __name__ == '__main__':
 
     except ValueError as e:
         print(str(e))
+
+

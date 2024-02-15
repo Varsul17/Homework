@@ -18,9 +18,9 @@ def condition_number(A):
   return cond, A_inv
 
 # Example usage
-A = np.array([[1, 2, 3],
-              [4, 5, 6],
-              [7, 8, 9]])
+A = np.array([[1,2, 3],
+              [46, 5, 1666],
+              [454648, -596956, 8574]])
 
 cond, A_inv = condition_number(A)
 
@@ -29,4 +29,3 @@ print(A)
 print()
 print("Inverse of A:")
 print(A_inv)
-print(cond)
