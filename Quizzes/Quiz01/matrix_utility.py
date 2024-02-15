@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def print_matrix(matrix): #מתדפיסה את המטריצה
+def print_matrix(matrix):  # מתדפיסה את המטריצה
     for row in matrix:
         for element in row:
             print(element, end=" ")  # Print each element in the row
@@ -26,6 +26,7 @@ def MaxNorm(matrix):  # מחשבת את הנורמה של המטריצה
             max_norm = norm
 
     return max_norm
+
 
 #  swapping between row i to row j in the matrix
 def swap_row(mat, i, j):
@@ -70,14 +71,14 @@ def DominantDiagonalFix(matrix):
     :param matrix: Matrix nxn
     :return: Change the matrix to a dominant diagonal
     """
-    #Check if we have a dominant for each column
-    dom = [0]*len(matrix)
+    # Check if we have a dominant for each column
+    dom = [0] * len(matrix)
     result = list()
-   # Find the largest organ in a row
+    # Find the largest organ in a row
     for i in range(len(matrix)):
         for j in range(len(matrix[0])):
-            if (matrix[i][j] > sum(map(abs,map(int,matrix[i])))-matrix[i][j]) :
-                dom[i]=j
+            if (matrix[i][j] > sum(map(abs, map(int, matrix[i]))) - matrix[i][j]):
+                dom[i] = j
     for i in range(len(matrix)):
         result.append([])
         # Cannot dominant diagonal
@@ -85,8 +86,8 @@ def DominantDiagonalFix(matrix):
             print("Couldn't find dominant diagonal.")
             return matrix
     # Change the matrix to a dominant diagonal
-    for i,j in enumerate(dom):
-        result[j]=(matrix[i])
+    for i, j in enumerate(dom):
+        result[j] = (matrix[i])
     return result
 
 
@@ -112,7 +113,6 @@ def matrix_multiply(A, B):
 
 
 def row_addition_elementary_matrix(n, target_row, source_row, scalar=1.0):
-
     if target_row < 0 or source_row < 0 or target_row >= n or source_row >= n:
         raise ValueError("Invalid row indices.")
 
@@ -126,7 +126,6 @@ def row_addition_elementary_matrix(n, target_row, source_row, scalar=1.0):
 
 
 def scalar_multiplication_elementary_matrix(n, row_index, scalar):
-
     if row_index < 0 or row_index >= n:
         raise ValueError("Invalid row index.")
 
@@ -137,6 +136,7 @@ def scalar_multiplication_elementary_matrix(n, row_index, scalar):
     elementary_matrix[row_index, row_index] = scalar
 
     return np.array(elementary_matrix)
+
 
 def Determinant(matrix, mul):
     """
@@ -166,8 +166,9 @@ def Determinant(matrix, mul):
             det = det + mul * Determinant(m, sign * matrix[0][i])
     return det
 
+
 # Partial Pivoting: Find the pivot row with the largest absolute value in the current column
-def partial_pivoting(A,i,N):
+def partial_pivoting(A, i, N):
     pivot_row = i
     v_max = A[pivot_row][i]
     for j in range(i + 1, N):
@@ -180,7 +181,6 @@ def partial_pivoting(A,i,N):
     if A[i][pivot_row] == 0:
         return "Singular Matrix"
 
-
     # Swap the current row with the pivot row
     if pivot_row != i:
         e_matrix = swap_rows_elementary_matrix(N, i, pivot_row)
@@ -188,6 +188,8 @@ def partial_pivoting(A,i,N):
         A = np.dot(e_matrix, A)
         print(f"The matrix after elementary operation :\n {A}")
         print("------------------------------------------------------------------")
+
+
 def MultiplyMatrix(matrixA, matrixB):
     """
     Function for multiplying 2 matrices
@@ -209,6 +211,8 @@ def MultiplyMatrix(matrixA, matrixB):
 def MakeIMatrix(cols, rows):
     # Initialize a identity matrix
     return [[1 if x == y else 0 for y in range(cols)] for x in range(rows)]
+
+
 def MulMatrixVector(InversedMat, b_vector):
     """
     Function for multiplying a vector matrix
@@ -227,7 +231,8 @@ def MulMatrixVector(InversedMat, b_vector):
             result[i][0] += InversedMat[i][k] * b_vector[k][0]
     return result
 
-def RowXchageZero(matrix,vector):
+
+def RowXchageZero(matrix, vector):
     """
       Function for replacing rows with both a matrix and a vector
       :param matrix: Matrix nxn
@@ -248,6 +253,7 @@ def RowXchageZero(matrix,vector):
 
     return [matrix, vector]
 
+
 def Cond(matrix, invert):
     """
     :param matrix: Matrix nxn
@@ -256,9 +262,10 @@ def Cond(matrix, invert):
     """
     print("|| A ||max = ", MaxNorm(matrix))
     print("|| A(-1) ||max = ", MaxNorm(invert))
-    return MaxNorm(matrix)*MaxNorm(invert)
+    return MaxNorm(matrix) * MaxNorm(invert)
 
-def InverseMatrix(matrix,vector):
+
+def InverseMatrix(matrix, vector):
     """
     Function for calculating an inverse matrix
     :param matrix:  Matrix nxn
@@ -276,22 +283,21 @@ def InverseMatrix(matrix,vector):
         # pivoting process
         matrix, vector = RowXchange(matrix, vector)
         elementary = MakeIMatrix(len(matrix[0]), len(matrix))
-        elementary[i][i] = 1/matrix[i][i]
+        elementary[i][i] = 1 / matrix[i][i]
         result = MultiplyMatrix(elementary, result)
         matrix = MultiplyMatrix(elementary, matrix)
         # make elementary loop to iterate for each row and subtracrt the number below (specific) pivot to zero  (make
         # elementary matrix and multiply with the result matrix )
-        for j in range(i+1, len(matrix)):
+        for j in range(i + 1, len(matrix)):
             elementary = MakeIMatrix(len(matrix[0]), len(matrix))
             elementary[j][i] = -(matrix[j][i])
             matrix = MultiplyMatrix(elementary, matrix)
             result = MultiplyMatrix(elementary, result)
 
-
     # after finishing with the lower part of the matrix subtract the numbers above the pivot with elementary for loop
     # (make elementary matrix and multiply with the result matrix )
-    for i in range(len(matrix[0])-1, 0, -1):
-        for j in range(i-1, -1, -1):
+    for i in range(len(matrix[0]) - 1, 0, -1):
+        for j in range(i - 1, -1, -1):
             elementary = MakeIMatrix(len(matrix[0]), len(matrix))
             elementary[j][i] = -(matrix[j][i])
             matrix = MultiplyMatrix(elementary, matrix)
@@ -323,6 +329,7 @@ def RowXchange(matrix, vector):
 
     return [matrix, vector]
 
+
 if __name__ == '__main__':
     matrix = [[1, 2, 25],
               [4, 5, 6],
@@ -333,3 +340,4 @@ if __name__ == '__main__':
     swap_row(matrix, 0, 1)
     print(print_matrix(matrix))
     print("Gal Warsulker")
+
