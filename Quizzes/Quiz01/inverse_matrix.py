@@ -68,9 +68,9 @@ def inverse(matrix):
 
 if __name__ == '__main__':
 
-    A = np.array([[0, 2, 4],
-                  [0, 5, 9],
-                  [3, 6, 8]])
+    A = np.array([[1, 2, 3],
+                  [4, 5, 6],
+                  [7, 8, 9]])
 
     try:
         A_inverse = inverse(A)

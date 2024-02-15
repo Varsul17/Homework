@@ -29,11 +29,12 @@ def MaxNorm(matrix):  # מחשבת את הנורמה של המטריצה
 
 #  swapping between row i to row j in the matrix
 def swap_row(mat, i, j):
-    N = len(mat)
-    for k in range(N + 1):
-        temp = mat[i][k]
-        mat[i][k] = mat[j][k]
-        mat[j][k] = temp
+    mat[i], mat[j] = mat[j], mat[i]
+    # N = len(mat)
+    # for k in range(N + 1):
+    #     temp = mat[i][k]
+    #     mat[i][k] = mat[j][k]
+    #     mat[j][k] = temp
 
 
 def is_diagonally_dominant(mat):
@@ -321,3 +322,13 @@ def RowXchange(matrix, vector):
                 max = abs(matrix[i][i])
 
     return [matrix, vector]
+
+if __name__ == '__main__':
+    matrix = [[1, 2, 25],
+              [4, 5, 6],
+              [7, 8, 9]]
+    print(print_matrix(matrix))
+    print(MaxNorm(matrix))
+    print()
+    swap_row(matrix, 0, 1)
+    print(print_matrix(matrix))
