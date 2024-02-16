@@ -41,7 +41,8 @@ def forward_substitution(mat):
 
         # if a principal diagonal element is zero,it denotes that matrix is singular,
         # and will lead to a division-by-zero later.
-        if not mat[k][pivot_row]:  # If not 1
+        if all(mat[i][k] == 0 for i in range(k, N)) or abs(
+                mat[k][k]) < 1e-10:  # If the column is all zeros or the pivot is very close to zero
             return k  # Matrix is singular
 
         # Swap the current row with the pivot row
@@ -79,15 +80,18 @@ def backward_substitution(mat):
             x[i] -= mat[i][j] * x[j]
 
         x[i] = (x[i] / mat[i][i])
+        return x
 
-    return x
+
+
 
 
 if __name__ == '__main__':
 
-    A_b = [[0, 1, -0, -1],
-           [3, 0, 1, 4],
-           [0, 1, 0, -3,]]
+    A_b = [[0, -1, 2, -1,-8],
+           [2, 0, 3, -3,-20],
+           [1,1,0,1,-2],
+           [1, -1, 4, 0,4]]
 
     print(gaussianElimination(A_b))
 
