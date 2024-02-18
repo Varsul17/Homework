@@ -336,32 +336,27 @@ def RowXchange(matrix, vector):
     return [matrix, vector]
 
 
-A = np.array([[1, 3, 9],
-              [1, 1, 4],
-              [4, 1, 1]])
+A = np.array([[8, 4, -9],
+              [1, 4, 0],
+              [4, 2, 1]])
 
 B = np.array([[1, 2, 9],
               [3, 5, 0],
               [1, 1, 1]])
 
 
-# print("Matrix A:")
-# print(A)
-# print(MaxNorm(A))
-# print(swap_row(A, 1, 2))
-# print(is_square_matrix(A))
-# print(matrix_multiply(A,B))
-# print(MultiplyMatrix(A, B))
-# print(Determinant(A,1))
-
 # det = np.linalg.det(A)
 # print(det) חישוב דטרמיננטה מהספריה בנוסף לפונקציה שיש
 
 # vector = [1, 2, 3]
-# print(MakeIMatrix(3,3))
 # print(MulMatrixVector(A,vector))
 # print(InverseMatrix(A,vector))
 
-#  אם רוצים להדפיס רק הפיכה יש פקודה
+#להדפיס רק את טיב ההצגה
+# print(Cond(A,InverseMatrix(A,[5, 4, 5])))
+
+
+#  אם רוצים להדפיס ***רק*** בלי אלמנטרי הפיכה יש פקודה
 # inverse_matrix = np.linalg.inv(A)
 # print(inverse_matrix)
+

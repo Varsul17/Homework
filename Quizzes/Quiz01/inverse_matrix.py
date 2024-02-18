@@ -86,9 +86,9 @@ def inverse(matrix):
 #מקבלת מטריצה ואת ההופכית שלה
 if __name__ == '__main__':
 
-    A = np.array([[1,10, -10],
-                  [0, 4, 6],
-                 [0,1,9]])
+    A = np.array([[-1,-10, -10],
+                  [-1, -4, -6],
+                 [-1,-1,-9]])
 
     try:
         A_inverse = inverse(A)
@@ -98,4 +98,5 @@ if __name__ == '__main__':
     except ValueError as e:
         print(str(e))
 
-    print(Cond(A, inverse(A)))
+#אם מפעילים פה COND אז זה מפעיל שוב את ההפיכה
+print(Cond(A,inverse(A)))
