@@ -1,5 +1,4 @@
 import numpy as np
-from numpy.linalg import norm, inv
 
 
 def gaussianElimination(mat):
@@ -8,11 +7,13 @@ def gaussianElimination(mat):
     singular_flag = forward_substitution(mat)
 
     if singular_flag != -1:
-
         if mat[singular_flag][N]:
             return "Singular Matrix (Inconsistent System)"
         else:
             return "Singular Matrix (May have infinitely many solutions)"
+
+    # Fixing the pivots
+    mat = fixPivots(mat)
 
     # if matrix is non-singular: get solution to system using backward substitution
     return backward_substitution(mat)
@@ -29,26 +30,36 @@ def swap_row(mat, i, j):
 
 def forward_substitution(mat):
     N = len(mat)
-    for k in range(N):  # k עמודה
+    for k in range(N):
 
         # Partial Pivoting: Find the pivot row with the largest absolute value in the current column
-        pivot_row = k  # setting the position of the pivot
+        pivot_row = k
         v_max = mat[pivot_row][k]
         for i in range(k + 1, N):
             if abs(mat[i][k]) > v_max:
                 v_max = mat[i][k]
                 pivot_row = i
 
+        # if a principal diagonal element is zero or too close to zero, find another pivot row
+        if abs(mat[k][k]) < 1e-10:
+            pivot_found = False
+            for i in range(k + 1, N):
+                if abs(mat[i][k]) > 1e-10:
+                    pivot_found = True
+                    swap_row(mat, k, i)
+                    break
+            if not pivot_found:
+                return k  # Matrix is singular
+
         # if a principal diagonal element is zero,it denotes that matrix is singular,
         # and will lead to a division-by-zero later.
         if all(mat[i][k] == 0 for i in range(k, N)) or abs(
-                mat[k][k]) < 1e-10:  # If the column is all zeros or the pivot is very close to zero
-            return k  # Matrix is singular
+                mat[k][k]) < 1e-10:
+            return k
 
         # Swap the current row with the pivot row
         if pivot_row != k:
             swap_row(mat, k, pivot_row)
-        # End Partial Pivoting
 
         for i in range(k + 1, N):
 
@@ -65,10 +76,34 @@ def forward_substitution(mat):
     return -1
 
 
-# function to calculate the values of the unknowns
+def fixPivots(mat):
+    N = len(mat)
+    for k in range(N):
+        # Partial Pivoting: Find the pivot row with the largest absolute value in the current column
+        pivot_row = k
+        v_max = mat[pivot_row][k]
+        for i in range(k + 1, N):
+            if abs(mat[i][k]) > v_max:
+                v_max = mat[i][k]
+                pivot_row = i
+
+        # If the pivot is not 1, perform row operations to make it 1
+        if mat[k][k] != 1:
+            # Divide the current row by the pivot to make it 1
+            pivot = mat[k][k]
+            for j in range(k, N + 1):
+                mat[k][j] /= pivot
+
+        # Swap the current row with the pivot row if necessary
+        if pivot_row != k:
+            swap_row(mat, k, pivot_row)
+
+    return mat
+
+
 def backward_substitution(mat):
     N = len(mat)
-    x = np.zeros(N)  # An array to store solution
+    x = np.zeros(N)
 
     # Start calculating from last equation up to the first
     for i in range(N - 1, -1, -1):
@@ -80,25 +115,16 @@ def backward_substitution(mat):
             x[i] -= mat[i][j] * x[j]
 
         x[i] = (x[i] / mat[i][i])
-        return x
 
-
-
+    return x
 
 
 if __name__ == '__main__':
 
-    A_b = [[0, -1, 2, -1,-8],
-           [2, 0, 3, -3,-20],
-           [1,1,0,1,-2],
-           [1, -1, 4, 0,4]]
+    A_b = [[1, 2, 3, 4, 5],
+           [2, 3, 4, 5, 1],
+           [8, 8, 8, 8, 1],
+           [24, 15, 22, 1, 8]]
 
     print(gaussianElimination(A_b))
 
-    # result = gaussianElimination(A_b)
-    # if isinstance(result, str):
-    #     print(result)
-    # else:
-    #     print("\nSolution for the system:")
-    #     for x in result:
-    #         print("{:.6f}".format(x))

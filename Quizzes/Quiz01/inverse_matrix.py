@@ -1,6 +1,6 @@
-from matrix_utility import row_addition_elementary_matrix, scalar_multiplication_elementary_matrix,Cond
+from matrix_utility import row_addition_elementary_matrix, scalar_multiplication_elementary_matrix, Cond
 import numpy as np
-#I am not SHLOMITTTT
+
 """
 Function that find the
  inverse of non-singular matrix
@@ -10,12 +10,15 @@ The resulting identity matrix will be the inverse of the input matrix if it is n
 """
 
 def inverse(matrix):
+    global matrix_number  # Define global variable to store matrix number
+    matrix_number = 0  # Initialize matrix number
     print(f"=================== Finding the inverse of a non-singular matrix using elementary row operations ===================\n {matrix}\n")
     if matrix.shape[0] != matrix.shape[1]:
         raise ValueError("Input matrix must be square.")
 
     n = matrix.shape[0]
     identity = np.identity(n)
+    counter = 0  # Initialize counter
 
     # Perform row operations to transform the input matrix into the identity matrix
     for i in range(n):
@@ -27,6 +30,9 @@ def inverse(matrix):
                     # Exchange rows i and k in both the input matrix and the identity matrix
                     matrix[[i, k]] = matrix[[k, i]]
                     identity[[i, k]] = identity[[k, i]]
+                    counter += 1  # Increment counter
+                    matrix_number += 1  # Increment matrix number
+                    print(f"Matrix number after elementary operation: {matrix_number}")
                     break
             else:
                 raise ValueError("Matrix is singular, cannot find its inverse.")
@@ -40,6 +46,9 @@ def inverse(matrix):
             print(f"The matrix after elementary operation :\n {matrix}")
             print("------------------------------------------------------------------------------------------------------------------")
             identity = np.dot(elementary_matrix, identity)
+            counter += 1  # Increment counter
+            matrix_number += 1  # Increment matrix number
+            print(f"Matrix number after elementary operation: {matrix_number}")
 
         # Zero out the elements above and below the diagonal
         for j in range(n):
@@ -51,6 +60,9 @@ def inverse(matrix):
                 print(f"The matrix after elementary operation :\n {matrix}")
                 print("------------------------------------------------------------------------------------------------------------------")
                 identity = np.dot(elementary_matrix, identity)
+                counter += 1  # Increment counter
+                matrix_number += 1  # Increment matrix number
+                print(f"Matrix number after elementary operation: {matrix_number}")
 
     for i in range(n)[::-1]:
         for j in range(n)[::-1]:
@@ -63,14 +75,19 @@ def inverse(matrix):
                 print(
                     "------------------------------------------------------------------------------------------------------------------")
                 identity = np.dot(elementary_matrix, identity)
+                counter += 1  # Increment counter
+                matrix_number += 1  # Increment matrix number
+                print(f"Matrix number after elementary operation: {matrix_number}")
 
+    print("Number of times the matrix was printed after elementary operations:", counter)  # Print counter
     return identity
 
 
 if __name__ == '__main__':
 
-    A = np.array([[0.913, 0.659],
-                  [0.457, 0.330]])
+    A = np.array([[1,10, -10],
+                  [0, 4, 6],
+                 [0,1,9]])
 
     try:
         A_inverse = inverse(A)
@@ -80,7 +97,4 @@ if __name__ == '__main__':
     except ValueError as e:
         print(str(e))
 
-
-print(Cond(A,inverse(A)))
-
-
+    print(Cond(A, inverse(A)))
