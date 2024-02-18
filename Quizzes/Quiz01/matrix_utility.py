@@ -265,6 +265,7 @@ def Cond(matrix, invert):
     """
     print("|| A ||max = ", MaxNorm(matrix))
     print("|| A(-1) ||max = ", MaxNorm(invert))
+    print("The cond is:")
     return MaxNorm(matrix) * MaxNorm(invert)
 
 
@@ -335,9 +336,9 @@ def RowXchange(matrix, vector):
     return [matrix, vector]
 
 
-A = np.array([[1, 2, 9],
-              [1, 1, 0],
-              [1, 1, 5]])
+A = np.array([[1, 3, 9],
+              [1, 1, 4],
+              [4, 1, 1]])
 
 B = np.array([[1, 2, 9],
               [3, 5, 0],
@@ -356,7 +357,11 @@ B = np.array([[1, 2, 9],
 # det = np.linalg.det(A)
 # print(det) חישוב דטרמיננטה מהספריה בנוסף לפונקציה שיש
 
-vector = [1, 2, 3]
+# vector = [1, 2, 3]
 # print(MakeIMatrix(3,3))
 # print(MulMatrixVector(A,vector))
-print(InverseMatrix(A,vector))
+# print(InverseMatrix(A,vector))
+
+#  אם רוצים להדפיס רק הפיכה יש פקודה
+# inverse_matrix = np.linalg.inv(A)
+# print(inverse_matrix)

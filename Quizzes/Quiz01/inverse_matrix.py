@@ -82,7 +82,8 @@ def inverse(matrix):
     print("Number of times the matrix was printed after elementary operations:", counter)  # Print counter
     return identity
 
-
+# הדפסת טיב ההצגה נמצא בutillity
+#מקבלת מטריצה ואת ההופכית שלה
 if __name__ == '__main__':
 
     A = np.array([[1,10, -10],
