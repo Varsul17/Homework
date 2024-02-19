@@ -119,6 +119,9 @@ def backward_substitution(mat):
     return x
 
 
+import numpy as np
+
+
 def gaussian_elimination(A):
     m, n = A.shape
     E_matrices = []
@@ -126,7 +129,7 @@ def gaussian_elimination(A):
     for i in range(min(m, n)):
         # Find the pivot row
         pivot_row = i
-        for k in range(i+1, m):
+        for k in range(i + 1, m):
             if abs(A[k, i]) > abs(A[pivot_row, i]):
                 pivot_row = k
 
@@ -138,16 +141,7 @@ def gaussian_elimination(A):
             E_matrices.append(E)
 
         # Eliminate elements below the pivot
-        for k in range(i+1, m):
-            factor = A[k, i] / A[i, i]
-            A[k, i:] -= factor * A[i, i:]
-            E = np.eye(m)
-            E[k, i] = -factor
-            E_matrices.append(E)
-
-    # Backward elimination to zero-out the upper triangle
-    for i in range(m - 1, 0, -1):
-        for k in range(i - 1, -1, -1):
+        for k in range(i + 1, m):
             factor = A[k, i] / A[i, i]
             A[k, i:] -= factor * A[i, i:]
             E = np.eye(m)
@@ -158,9 +152,9 @@ def gaussian_elimination(A):
 
 
 # Example matrix
-A = np.array([[-1, -2, 3, 2],
-              [4, -1, 1, 4],
-              [1, 6, 2, 9]], dtype=float)  # Set the dtype to float
+A = np.array([[1, 10, -10, 1],
+              [0, 4, 6, 1],
+              [0, 1, 9, 1]], dtype=float)  # Set the dtype to float
 
 # Perform Gaussian elimination
 A_reduced, E_matrices = gaussian_elimination(A.copy())
@@ -174,7 +168,6 @@ for i, E in enumerate(E_matrices):
 # Print reduced row echelon form
 print("Reduced Row Echelon Form:")
 print(A_reduced)
-
 
 # if __name__ == '__main__':
 #

@@ -360,8 +360,8 @@ B = np.array([[1, 2, 9],
 # inverse_matrix = np.linalg.inv(A)
 # print(inverse_matrix)
 
-print("Max norm is:")
-print(MaxNorm(A))
-maxi=MaxNorm(A)
-print("with the quastion number")
-print()
+# print("Max norm is:")
+# print(MaxNorm(A))
+# maxi=MaxNorm(A)
+# print("with the quastion number")
+# print()
