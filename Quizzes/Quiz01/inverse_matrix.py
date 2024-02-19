@@ -221,12 +221,14 @@ def mult_elementaries(matrix, num1, num2):
 #מקבלת מטריצה ואת ההופכית שלה
 if __name__ == '__main__':
 
-    A = np.array([[1, 10, -10],
-                  [0, 4, 6],
-                  [0, 1, 9]])
-    print_specific_elementary(A, 4)
-    # print_specific_elementary(A, 7)
-    # print_specific_elementary(A, 5)
+    A = np.array([[1, 1/2 , 1/3],
+                  [1/2, 1/3, 1/4],
+                  [1/3, 1/4, 1/5]])
+    print_specific_elementary(A, 0)
+    print("=====================================================================================================================")
+    print_specific_elementary(A, 1)
+    print("=====================================================================================================================")
+    print_specific_elementary(A, 2)
     # print(mult_elementaries(A, 7, 5))
     # try:
     #     A_inverse = inverse(A)

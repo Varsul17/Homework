@@ -336,9 +336,9 @@ def RowXchange(matrix, vector):
     return [matrix, vector]
 
 
-A = np.array([[8, 4, -9],
-              [1, 4, 0],
-              [4, 2, 1]])
+A = np.array([[1, 1/2 , 1/3],
+              [1/2, 1/3, 1/4],
+              [1/3, 1/4, 1/5]])
 
 B = np.array([[1, 2, 9],
               [3, 5, 0],
@@ -360,3 +360,8 @@ B = np.array([[1, 2, 9],
 # inverse_matrix = np.linalg.inv(A)
 # print(inverse_matrix)
 
+print("Max norm is:")
+print(MaxNorm(A))
+maxi=MaxNorm(A)
+print("with the quastion number")
+print()
