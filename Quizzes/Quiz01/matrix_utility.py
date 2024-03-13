@@ -37,14 +37,15 @@ def swap_row(mat, i, j):
         mat[j][k] = temp
     return mat
 
+#TODO
 # needs a fix
-# def is_diagonally_dominant(mat):
-#     if mat is None:
-#         return False
-#
-#     d = np.diag(np.abs(mat))  # Find diagonal coefficients
-#     s = np.sum(np.abs(mat), axis=1) - d  # Find row sum without diagonal
-#     return np.all(d > s)
+def is_diagonally_dominant(mat):
+    if mat is None:
+        return False
+
+    d = np.diag(np.abs(mat))  # Find diagonal coefficients
+    s = np.sum(np.abs(mat), axis=1) - d  # Find row sum without diagonal
+    return np.all(d > s)
 
 
 def is_square_matrix(mat):
@@ -57,39 +58,39 @@ def is_square_matrix(mat):
             return False
     return True
 
-
-# def reorder_dominant_diagonal(matrix):
-#     n = len(matrix)
-#     permutation = np.argsort(np.diag(matrix))[::-1]
-#     reordered_matrix = matrix[permutation][:, permutation]
-#     return reordered_matrix
+#TODO
+def reorder_dominant_diagonal(matrix):
+    n = len(matrix)
+    permutation = np.argsort(np.diag(matrix))[::-1]
+    reordered_matrix = matrix[permutation][:, permutation]
+    return reordered_matrix
 # הופכת את המטריצה כמראה, מימין לשמאל מלמטה למעלה
 
 
 
-# def DominantDiagonalFix(matrix):
-#     """
-#     Function to change a matrix to create a dominant diagonal
-#     :param matrix: Matrix nxn
-#     :return: Change the matrix to a dominant diagonal
-#     """
-#     n = len(matrix)
-#     for i in range(n):
-#         row_sum = sum(abs(matrix[i][j]) for j in range(n) if i != j)
-#         if abs(matrix[i][i]) <= row_sum:
-#             # Couldn't find dominant diagonal.
-#             print("Couldn't find dominant diagonal.")
-#             return matrix
-#
-#     result = []
-#     for i in range(n):
-#         result.append([0] * n)
-#         result[i][i] = matrix[i][i]
-#         for j in range(n):
-#             if i != j:
-#                 result[i][j] = matrix[j][i]
-#
-#     return result
+def DominantDiagonalFix(matrix):
+    """
+    Function to change a matrix to create a dominant diagonal
+    :param matrix: Matrix nxn
+    :return: Change the matrix to a dominant diagonal
+    """
+    n = len(matrix)
+    for i in range(n):
+        row_sum = sum(abs(matrix[i][j]) for j in range(n) if i != j)
+        if abs(matrix[i][i]) <= row_sum:
+            # Couldn't find dominant diagonal.
+            print("Couldn't find dominant diagonal.")
+            return matrix
+
+    result = []
+    for i in range(n):
+        result.append([0] * n)
+        result[i][i] = matrix[i][i]
+        for j in range(n):
+            if i != j:
+                result[i][j] = matrix[j][i]
+
+    return result
 
 
 
@@ -336,32 +337,10 @@ def RowXchange(matrix, vector):
     return [matrix, vector]
 
 
-A = np.array([[1, 1/2 , 1/3],
-              [1/2, 1/3, 1/4],
-              [1/3, 1/4, 1/5]])
+A = np.array([[150, 10 , 3],
+              [5, 8, 4],
+              [5, 6, 70]])
 
-B = np.array([[1, 2, 9],
-              [3, 5, 0],
-              [1, 1, 1]])
+print(is_diagonally_dominant(A))
 
 
-# det = np.linalg.det(A)
-# print(det) חישוב דטרמיננטה מהספריה בנוסף לפונקציה שיש
-
-# vector = [1, 2, 3]
-# print(MulMatrixVector(A,vector))
-# print(InverseMatrix(A,vector))
-
-#להדפיס רק את טיב ההצגה
-# print(Cond(A,InverseMatrix(A,[5, 4, 5])))
-
-
-#  אם רוצים להדפיס ***רק*** בלי אלמנטרי הפיכה יש פקודה
-# inverse_matrix = np.linalg.inv(A)
-# print(inverse_matrix)
-
-# print("Max norm is:")
-# print(MaxNorm(A))
-# maxi=MaxNorm(A)
-# print("with the quastion number")
-# print()
