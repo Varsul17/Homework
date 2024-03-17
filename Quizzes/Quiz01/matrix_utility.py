@@ -68,27 +68,30 @@ def reorder_dominant_diagonal(matrix):
 
 
 
-def DominantDiagonalFix(matrix):
+def DominantDiagonalFix(matrix, vector_b):
     """
     Function to change a matrix to create a dominant diagonal
     :param matrix: Matrix nxn
     :return: Change the matrix to a dominant diagonal
     """
-    n = len(matrix)
-    for i in range(n):
-        row_sum = sum(abs(matrix[i][j]) for j in range(n) if i != j)
-        if abs(matrix[i][i]) <= row_sum:
-            # Couldn't find dominant diagonal.
-            print("Couldn't find dominant diagonal.")
-            return matrix
+    size = len(matrix)
+    # for i in range(size):
+    #     row_sum = sum(abs(matrix[i][j]) for j in range(size) if i != j)
+    #     if abs(matrix[i][i]) > row_sum:
+    #         # Couldn't find dominant diagonal.
+    #         print("Couldn't find dominant diagonal.")
+    #         return matrix
 
-    result = []
-    for i in range(n):
-        result.append([0] * n)
-        result[i][i] = matrix[i][i]
-        for j in range(n):
-            if i != j:
-                result[i][j] = matrix[j][i]
+    result = matrix.copy()
+    for i in range(size):
+        for j in range(i + 1, size):
+            if result[i][i] < result[j][i]:
+                result[i], result[j] = result[j].copy(), result[i].copy()
+                vector_b[i], vector_b[j] = vector_b[j].copy(), vector_b[i].copy()
+
+    if is_diagonally_dominant(result) == False:
+        print("Matrix doesn't have dominant diagonal, attempted for solution anyway")
+
 
     return result
 
@@ -335,12 +338,3 @@ def RowXchange(matrix, vector):
                 max = abs(matrix[i][i])
 
     return [matrix, vector]
-
-
-A = np.array([[150, 10 , 3],
-              [5, 8, 4],
-              [5, 6, 70]])
-
-print(is_diagonally_dominant(A))
-
-

@@ -41,5 +41,5 @@ if __name__ == '__main__':
     X0 = np.zeros_like(b)
 
     solution =gauss_seidel(A, b, X0)
-    print(bcolors.OKBLUE,"\nApproximate solution:", solution)
+    print("\nApproximate solution:", solution)
 

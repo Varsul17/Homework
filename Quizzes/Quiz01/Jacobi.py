@@ -1,6 +1,6 @@
 import numpy as np
 from numpy.linalg import norm
-from matrix_utility import is_diagonally_dominant, DominantDiagonalFix, is_square_matrix
+from matrix_utility import is_diagonally_dominant, DominantDiagonalFix, is_square_matrix, reorder_dominant_diagonal
 
 """
 Performs Jacobi iterations to solve the line system of equations, Ax=b, 
@@ -24,14 +24,18 @@ Returns variables:
 
 """
 
+
 def jacobi_iterative(matrix, vector_b, vector_0, TOL=1e-16, max_Iteration=200):
     size = len(matrix)
     Iteration = 1
 
     if is_diagonally_dominant(matrix):
         print('Matrix is diagonally dominant - preforming jacobi algorithm\n')
-
-    print( "Iteration" + "\t\t\t".join([" {:>12}".format(var) for var in ["x{}".format(i) for i in range(1, len(matrix) + 1)]]))
+    else:
+        matrix = DominantDiagonalFix(matrix, vector_b)
+    print(vector_b)
+    print("Iteration" + "\t\t\t".join(
+        [" {:>12}".format(var) for var in ["x{}".format(i) for i in range(1, len(matrix) + 1)]]))
     print("-----------------------------------------------------------------------------------------------")
 
     while Iteration <= max_Iteration:
@@ -56,9 +60,8 @@ def jacobi_iterative(matrix, vector_b, vector_0, TOL=1e-16, max_Iteration=200):
 
 
 if __name__ == "__main__":
-
-    A = np.array([[3, -1, 1], [0, 1, -1], [1, 1, -2]])
-    b = np.array([4, -1, -3])
+    A = np.array([[0, 1, -1], [3, -1, 1], [1, 1, -2]])
+    b = np.array([-1, 4, -3])
 
     x = np.zeros_like(b, dtype=np.double)
     solution = jacobi_iterative(A, b, x)
