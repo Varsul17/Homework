@@ -1,6 +1,5 @@
 import numpy as np
 
-from colors import bcolors
 from matrix_utility import swap_rows_elementary_matrix, row_addition_elementary_matrix
 
 
@@ -29,8 +28,7 @@ def lu(A):
             print(f"elementary matrix for swap between row {i} to row {pivot_row} :\n {e_matrix} \n")
             A = np.dot(e_matrix, A)
             print(f"The matrix after elementary operation :\n {A}")
-            print(bcolors.OKGREEN, "---------------------------------------------------------------------------",
-                  bcolors.ENDC)
+            print( "---------------------------------------------------------------------------")
 
         for j in range(i + 1, N):
             #  Compute the multiplier
@@ -41,8 +39,7 @@ def lu(A):
             A = np.dot(e_matrix, A)
             print(f"elementary matrix to zero the element in row {j} below the pivot in column {i} :\n {e_matrix} \n")
             print(f"The matrix after elementary operation :\n {A}")
-            print(bcolors.OKGREEN, "---------------------------------------------------------------------------",
-                  bcolors.ENDC)
+            print("---------------------------------------------------------------------------")
 
     U = A
     return L, U
@@ -73,7 +70,7 @@ def lu_solve(A_b):
     print("Upper triangular matrix U:\n", U)
 
     result = backward_substitution(U)
-    print(bcolors.OKBLUE, "\nSolution for the system:")
+    print( "\nSolution for the system:")
     for x in result:
         print("{:.6f}".format(x))
 
