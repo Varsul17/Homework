@@ -1,6 +1,6 @@
-import math
+
 import numpy as np
-from colors import bcolors
+
 
 """
 Receives 3 parameters:
@@ -12,6 +12,7 @@ Returns variables:
     1.  S - The minimum number of iterations required to reach the desired accuracy
 """
 def max_steps(a, b, err):
+    #Calculates the minimum number of iterations required to reach the desired accuracy
     s = int(np.floor(- np.log2(err / (b - a)) / np.log2(2) - 1))
     return s
 
@@ -27,34 +28,37 @@ Returns variables:
     1.  c - The approximate root of the function f
 """
 def bisection_method(f, a, b, tol=1e-6):
+    # Checks if the signs of f(a) and f(b) are the same.
+    # If they are, it means the root is not bracketed between a and b.
     if np.sign(f(a)) == np.sign(f(b)):
-        raise Exception("The scalars a and b do not bound a root")
+        raise ValueError("The scalars a and b do not bound a root")
     c, k = 0, 0
     steps = max_steps(a, b, tol)  # calculate the max steps possible
 
-    print("{:<10} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15}".format("Iteration", "a", "b", "f(a)", "f(b)", "c", "f(c)"))
+    print("{:<10} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15}".format("Iteration", "a", "f(a)", "b", "f(b)", "c", "f(c)" , "update"))
 
     # while the diff af a&b is not smaller than tol, and k is not greater than the max possible steps
     while abs(b - a) > tol and k < steps:
-        c = a + (b - a) / 2  # Calculation of the middle value
+        c = ( a + b ) / 2  # Calculation of the middle value
 
-        if f(c) == 0 :
-            return c  # Procedure completed successfully
+        print("{:<10} {:<15.6f} {:<15.6f} {:<15.6f} {:<15.6f} {:<15.6f} {:<15.6f} {:<15}".format(k, a, f(a), b, f(b), c, f(c) , "a=c" if f(c) * f(a) > 0 else "b=c"))
 
-        if f(c) * f(a) < 0:  # if sign changed between steps
-            b = c  # move forward
+        if f(c) * f(a) > 0:  # if sign changed between steps
+            a = c  # move forward
         else:
-            a = c  # move backward
-
-        print("{:<10} {:<15.6f} {:<15.6f} {:<15.6f} {:<15.6f} {:<15.6f} {:<15.6f}".format(k, a, b, f(a), f(b), c, f(c)))
+            b = c  # move backward
         k += 1
+    if k == steps:
+        print("Maximum number of steps reached without convergence.")
 
     return c  # return the current root
 
 
 
-if __name__ == '__main__':
-    f = lambda x: x**2 - 4 * math.sin(x)
-    roots = bisection_method(f, 1, 3)
-    print(bcolors.OKBLUE, f"\nThe equation f(x) has an approximate root at x = {roots}",bcolors.ENDC,)
-
+if __name__ == '__main__': #defining function
+    f = lambda x: x**2-6*x+8
+    try :
+        roots = bisection_method(f, 3, 5)
+        print(f"\nThe equation f(x) has an approximate root at x = {roots}")
+    except  ValueError as e :
+        print(e)
