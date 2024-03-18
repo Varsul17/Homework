@@ -169,11 +169,15 @@ for i, E in enumerate(E_matrices):
 print("Reduced Row Echelon Form:")
 print(A_reduced)
 
-# if __name__ == '__main__':
-#
-#     A_b = [[2, 3, 0, 5],
-#            [3, 4, 5, 1],
-#            [8, 8, 3, 1]]
-#
-#     print(gaussianElimination(A_b))
-#
+if __name__ == '__main__':
+
+    A_b = [[2, 3, 4, 5, 6, 70],
+           [-5, 3, 4, -2, 3, 20],
+           [4, -5, -2, 2, 6, 26],
+           [4, 5, -1, -2, -3, -12],
+           [5, 5, 3, -3, 5, 37]]
+
+
+
+    print(gaussianElimination(A_b))
+
