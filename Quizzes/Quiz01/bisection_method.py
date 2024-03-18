@@ -70,7 +70,8 @@ def find_all_roots(f, a, b, tol=1e-6):
                 root = sp.nsolve(f_sym, (interval.start + interval.end)/2, tol=tol)
                 roots.append(root)
             except ValueError:
-                print(f"Could not find root within tolerance in interval {interval}")
+                print()
+#                print(f"Could not find root within tolerance in interval {interval}")
 
     return roots
 
