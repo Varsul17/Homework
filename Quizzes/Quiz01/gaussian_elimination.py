@@ -160,14 +160,14 @@ A = np.array([[1, 10, -10, 1],
 A_reduced, E_matrices = gaussian_elimination(A.copy())
 
 # Print elementary matrices
-for i, E in enumerate(E_matrices):
-    print(f"Elementary Matrix {i + 1}:")
-    print(E)
-    print()
-
-# Print reduced row echelon form
-print("Reduced Row Echelon Form:")
-print(A_reduced)
+# for i, E in enumerate(E_matrices):
+#     print(f"Elementary Matrix {i + 1}:")
+#     print(E)
+#     print()
+#
+# # Print reduced row echelon form
+# print("Reduced Row Echelon Form:")
+# print(A_reduced)
 
 if __name__ == '__main__':
 
@@ -178,6 +178,6 @@ if __name__ == '__main__':
            [5, 5, 3, -3, 5, 37]]
 
 
-
+    print("sol of mat:")
     print(gaussianElimination(A_b))
 
