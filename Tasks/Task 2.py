@@ -3,6 +3,8 @@
 #Daniel Yehudai - 209089911
 #Daniella Graham 209611995
 
+#Git: https://github.com/Varsul17/Homework/blob/main/Tasks/Task%202.py
+
 import numpy as np
 
 def jacobi_method(A, b, tol=0.001):
