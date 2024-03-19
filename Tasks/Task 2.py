@@ -3,7 +3,6 @@
 #Daniel Yehudai - 209089911
 #Daniella Graham 209611995
 
-
 import numpy as np
 
 def jacobi_method(A, b, tol=0.001):
