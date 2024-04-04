@@ -1,3 +1,11 @@
+#Gal Warsulker - 206493173
+#Avigail Benitta - 209476621
+#Daniel Yehudai - 209089911
+#Daniella Graham 209611995
+
+#Git: https://github.com/Varsul17/Homework/blob/main/Tasks/Task%203.py
+
+
 from math import e
 import sympy as sp
 import math
