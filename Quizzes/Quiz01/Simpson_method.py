@@ -1,10 +1,7 @@
 import math
-import numpy as np
-import matplotlib.pyplot as plt
 
 import sympy as sp
 
-from colors import bcolors
 from sympy.utilities.lambdify import lambdify
 x = sp.symbols('x')
 def simpsons_rule(f, a, b, n):
@@ -36,7 +33,7 @@ def simpsons_rule(f, a, b, n):
 
     integral *= h / 3
 
-    return integral
+    return abs(integral)
 
 
 if __name__ == '__main__':
@@ -47,5 +44,5 @@ if __name__ == '__main__':
 
     print( f" Division into n={n} sections ")
     integral = simpsons_rule(f, 0, 1, n)
-    print(bcolors.OKBLUE, f"Numerical Integration of definite integral in range [{a},{b}] is {integral}", bcolors.ENDC)
+    print(f"Numerical Integration of definite integral in range [{a},{b}] is {integral}")
 

@@ -144,7 +144,7 @@ if __name__ == "__main__":
 
     # if you want to try other functions please change here my_f
 
-    my_f = x**2 + 3*x + 2
+    my_f = x** 2 - 5 * x + 2
 
 
     ##my_f = x**2-4*x
