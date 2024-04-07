@@ -33,3 +33,4 @@ if __name__ == '__main__':
     y_interpolate = lagrange_interpolation(x_data, y_data, x_interpolate)
     print(bcolors.OKBLUE, "\nInterpolated value at x =", x_interpolate, "is y =", y_interpolate, bcolors.ENDC)
 
+
