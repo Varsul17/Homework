@@ -1,6 +1,3 @@
-from colors import bcolors
-
-
 def lagrange_interpolation(x_data, y_data, x):
     """
     Lagrange Interpolation
@@ -25,12 +22,10 @@ def lagrange_interpolation(x_data, y_data, x):
 
     return result
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     x_data = [1, 2, 5]
     y_data = [1, 0, 2]
     x_interpolate = 3  # The x-value where you want to interpolate
     y_interpolate = lagrange_interpolation(x_data, y_data, x_interpolate)
-    print(bcolors.OKBLUE, "\nInterpolated value at x =", x_interpolate, "is y =", y_interpolate, bcolors.ENDC)
-
-
+    print("\nInterpolated value at x =", x_interpolate, "is y =", y_interpolate)

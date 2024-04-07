@@ -1,3 +1,5 @@
+
+
 def checkIfSquare(mat):
     """
     this function checks if the matrixis square.
