@@ -1,6 +1,4 @@
 import numpy as np
-from colors import bcolors
-
 
 def romberg_integration(func, a, b, n):
     """
@@ -36,16 +34,15 @@ def romberg_integration(func, a, b, n):
 
 
 def f(x):
-    return 1/(2+x ** 4)
-
+    return (np.sin(x**2 + 5*x +6))/2*np.e**-x
 
 if __name__ == '__main__':
 
-    a = 0
-    b = 1
-    n = 5
+    a = 1.1
+    b = -1.4
+    n = 15
     integral = romberg_integration(f, a, b, n)
 
     print( f" Division into n={n} sections ")
-    print(bcolors.OKBLUE, f"Approximate integral in range [{a},{b}] is {integral}", bcolors.ENDC)
+    print( f"Approximate integral in range [{a},{b}] is {round(integral, 5)}")
 

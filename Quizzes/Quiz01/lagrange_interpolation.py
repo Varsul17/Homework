@@ -24,8 +24,12 @@ def lagrange_interpolation(x_data, y_data, x):
 
 
 if __name__ == '__main__':
-    x_data = [1, 2, 5]
-    y_data = [1, 0, 2]
-    x_interpolate = 3  # The x-value where you want to interpolate
+    x_data = [1.2, 1.3, 1.4, 1.5, 1.6]
+    y_data = [-1.2, -2.3, -0.5, 0.89, 1.37]
+    x_interpolate = 1.55  # The x-value where you want to interpolate
     y_interpolate = lagrange_interpolation(x_data, y_data, x_interpolate)
     print("\nInterpolated value at x =", x_interpolate, "is y =", y_interpolate)
+    x_interpolate = 1.35  # The x-value where you want to interpolate
+    y_interpolate = lagrange_interpolation(x_data, y_data, x_interpolate)
+    print("\nInterpolated value at x =", x_interpolate, "is y =", y_interpolate)
+
