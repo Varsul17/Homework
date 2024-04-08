@@ -37,13 +37,14 @@ def simpsons_rule(f, a, b, n):
 
     return integral
 
-if __name__ == '__main__':
-    f = lambda x: (math.sin(x**2 + 5*x +6))/(2*math.e**(-x))
-    n = 60
-    a = -1.4
-    b = 1.1
 
-    print( f" Division into n={n} sections ")
+if __name__ == '__main__':
+    f = lambda x: (math.sin(x ** 2 + 5 * x + 6)) / (2 * math.e ** (-x))
+    n = 60
+    # לרשום את הקטן למעלה
+    a = 3.8
+    b = 4.2
+
+    print(f" Division into n={n} sections ")
     integral = simpsons_rule(f, a, b, n)
     print(f"Numerical Integration of definite integral in range [{a},{b}] is {round(integral, 5)}")
-

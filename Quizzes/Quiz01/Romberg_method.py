@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def romberg_integration(func, a, b, n):
     """
     Romberg Integration
@@ -33,16 +34,12 @@ def romberg_integration(func, a, b, n):
     return R[n - 1, n - 1]
 
 
-def f(x):
-    return (np.sin(x**2 + 5*x +6))/2*np.e**-x
-
 if __name__ == '__main__':
-
     a = 1.1
     b = -1.4
     n = 15
+    f = lambda x: (np.sin(x ** 2 + 5 * x + 6)) / (2 * np.e ** (-x))
     integral = romberg_integration(f, a, b, n)
 
-    print( f" Division into n={n} sections ")
-    print( f"Approximate integral in range [{a},{b}] is {round(integral, 5)}")
-
+    print(f" Division into n={n} sections ")
+    print(f"Approximate integral in range [{a},{b}] is {round(integral, 5)}")
