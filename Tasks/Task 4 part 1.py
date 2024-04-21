@@ -1,3 +1,11 @@
+#Gal Warsulker - 206493173
+#Avigail Benitta - 209476621
+#Daniel Yehudai - 209089911
+#Daniella Graham 209611995
+
+#Git: https://github.com/Varsul17/Homework/blob/main/Tasks/Task%204%20part%201.py
+
+
 from Quizzes.Quiz01.matrix_utility import *
 
 def lagrange_interpolation(x_data, y_data, x):
